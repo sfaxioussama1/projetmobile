@@ -20,9 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Authentification" />
-
-        <activity android:name=".AjoutClient">
-        </activity>
+        <activity android:name=".AjoutClient"></activity>
+        <activity android:name=".AfficherProduit"></activity>
     </application>
 
 </manifest>
