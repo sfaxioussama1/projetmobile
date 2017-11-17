@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Agil.iml" filepath="$PROJECT_DIR$/Agil.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MiniProjetAgil.iml" filepath="$PROJECT_DIR$/MiniProjetAgil.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/projetmobile.iml" filepath="$PROJECT_DIR$/projetmobile.iml" />
     </modules>
   </component>
 </project>

@@ -24,7 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,7 +94,13 @@ public class AjoutClient extends AppCompatActivity  {
     }
 
 
+public void envoieSMS(View v){
+    Intent cnx = new Intent(getApplication(),envoieSMS.class);
+    cnx.putExtra("m",tel.getText().toString());
+    cnx.putExtra("btnajouter",btnajouter.getText().toString());
+    startActivity(cnx);
 
+}
 
 
 
@@ -128,6 +133,9 @@ public class AjoutClient extends AppCompatActivity  {
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(AjoutClient.this,"valide",Toast.LENGTH_SHORT).show();
+                    Intent i1= new Intent(getApplicationContext(),envoieSMS.class);
+                    i1.putExtra("Tel",tel.getText().toString());
+                    startActivity(i1);
 
                 }
             }, new Response.ErrorListener() {
@@ -376,3 +384,4 @@ public class AjoutClient extends AppCompatActivity  {
     }
 
 }
+    
