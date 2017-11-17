@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -53,6 +54,14 @@ public class AfficherProduit extends Activity {
         listView = (ListView) findViewById(R.id.listView1);
         requestQueue = Volley.newRequestQueue(this);
         recup();
+        ImageButton btn = (ImageButton) findViewById(R.id.fab);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i1= new Intent(getApplicationContext(),AjoutClient.class);
+                startActivity(i1);
+            }
+        });
     }
 
     public void recup(){

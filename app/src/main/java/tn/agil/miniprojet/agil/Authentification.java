@@ -82,7 +82,7 @@ public class Authentification extends AppCompatActivity implements View.OnClickL
                             exist = true;
                             Toast.makeText(Authentification.this, "Bienvenue", Toast.LENGTH_LONG).show();
                             //acceder à la page suivante
-                            Intent i1= new Intent(getApplicationContext(),AjoutClient.class);
+                            Intent i1= new Intent(getApplicationContext(),AfficherProduit.class);
                             startActivity(i1);
                         }
 
