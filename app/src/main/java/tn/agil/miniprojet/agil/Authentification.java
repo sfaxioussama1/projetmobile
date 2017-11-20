@@ -26,7 +26,7 @@ public class Authentification extends AppCompatActivity implements View.OnClickL
     EditText log, pass;
     boolean exist=false;
     RequestQueue requestQueue;
-    String showUrl="http://192.168.137.1/test/loginGerant.php";
+    String showUrl="http://192.168.1.100:81/WebService1/loginGerant.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +75,8 @@ public class Authentification extends AppCompatActivity implements View.OnClickL
 
                     for (int i = 0; i < users.length(); i++) {
                         JSONObject user = users.getJSONObject(i);
-                        String testL = user.getString("login");
-                        String testM = user.getString("mot de passe");
+                        String testL = user.getString("loginG");
+                        String testM = user.getString("password");
 
                         if(testL.equals(l) && testM.contentEquals(m)) {
                             exist = true;

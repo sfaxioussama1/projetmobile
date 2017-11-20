@@ -7,8 +7,13 @@
     android:baselineAligned="true"
     android:orientation="vertical"
     tools:context="tn.agil.miniprojet.agil.AjoutClient"
-    android:weightSum="7"
-    >
+    android:weightSum="8"
+ >
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg">
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,8 +21,8 @@
         tools:layout_editor_absoluteX="8dp"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:weightSum="2">
-
+        android:weightSum="2"
+        >
         <TextView
             android:id="@+id/Cin"
             android:layout_width="match_parent"
@@ -26,7 +31,8 @@
             android:lineSpacingExtra="8dp"
             android:padding="16dp"
             android:paddingBottom="8dp"
-            android:text="Cin : " />
+            android:text="Cin : "
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/editCin"
@@ -39,6 +45,7 @@
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:textSize="13sp"
+            android:textColor="#ffffff"
 
             />
 
@@ -61,7 +68,8 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:paddingBottom="8dp"
-            android:text="Nom : " />
+            android:text="Nom : "
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/editN"
@@ -71,6 +79,7 @@
             android:layout_weight="1"
             android:paddingTop="8dp"
             android:textSize="13sp"
+            android:textColor="#ffffff"
 
             />
 
@@ -93,6 +102,7 @@
             android:padding="16dp"
             android:paddingBottom="8dp"
             android:lineSpacingExtra="8dp"
+            android:textColor="#ffffff"
             />
 
         <EditText
@@ -103,6 +113,7 @@
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:textSize="13sp"
+            android:textColor="#ffffff"
          />
 
     </LinearLayout>
@@ -123,7 +134,8 @@
             android:text="N° Telephone : "
             android:padding="16dp"
             android:paddingBottom="8dp"
-            android:lineSpacingExtra="8dp" />
+            android:lineSpacingExtra="8dp"
+            android:textColor="#ffffff"/>
 
         <EditText
             android:id="@+id/editT"
@@ -136,6 +148,7 @@
             android:inputType="phone"
             android:maxLength="8"
             android:digits="0123456789"
+            android:textColor="#ffffff"
          />
     </LinearLayout>
     <LinearLayout
@@ -145,6 +158,7 @@
         tools:layout_editor_absoluteX="8dp"
         android:orientation="horizontal"
         android:layout_weight="1"
+
         android:weightSum="2">
         >
         <TextView
@@ -155,7 +169,8 @@
             android:text="Station : "
             android:padding="16dp"
             android:paddingBottom="8dp"
-            android:lineSpacingExtra="8dp" />
+            android:lineSpacingExtra="8dp"
+            android:textColor="#ffffff"/>
 
         <Spinner
             android:id="@+id/stationList"
@@ -163,7 +178,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" >
+            android:layout_centerHorizontal="true"
+            >
 
         </Spinner>
     </LinearLayout>
@@ -185,7 +201,8 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:paddingBottom="8dp"
-            android:lineSpacingExtra="8dp" />
+            android:lineSpacingExtra="8dp"
+            android:textColor="#ffffff"/>
 
         <Spinner
             android:id="@+id/prodList"
@@ -193,7 +210,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" >
+            android:layout_centerHorizontal="true"
+            >
 
         </Spinner>
     </LinearLayout>
@@ -216,6 +234,7 @@
             android:text="Quantité : "
             android:padding="16dp"
             android:paddingBottom="8dp"
+            android:textColor="#ffffff"
             android:lineSpacingExtra="8dp" />
 
         <EditText
@@ -228,13 +247,9 @@
             android:textSize="13sp"
             android:inputType="number"
             android:maxLength="2"
+            android:textColor="#ffffff"
             android:digits="0123456789"/>
     </LinearLayout>
-
-
-
-
-
 
     <Button
         android:id="@+id/btnAjout"
@@ -242,7 +257,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginLeft="260dp"
-        android:text="Ajouter" />
+        android:text="Ajouter"
+        android:background="#E0E0E0"
+        android:textColor="#000000"/>
 
 
 

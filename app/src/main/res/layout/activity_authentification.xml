@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tn.agil.miniprojet.agil.Authentification">
+    tools:context="tn.agil.miniprojet.agil.Authentification"
+    android:background="@mipmap/bgagil"
+    >
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg">
+    </android.support.v7.widget.Toolbar>
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
@@ -41,14 +48,19 @@
                     android:ems="10"
                     android:hint="password"
                     android:inputType="textPassword"
+                    android:textColor="#E0E0E0"
                     android:padding="10dp"
                     />
                 <Button
                     android:id="@+id/button1"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dip"
-                    android:text="Login"
+                    android:layout_marginLeft="100dp"
+                    android:text="    Connecter   "
+                    android:background="#E0E0E0"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
                     />
 
             </LinearLayout>

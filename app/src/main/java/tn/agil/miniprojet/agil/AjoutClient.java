@@ -8,6 +8,7 @@ package tn.agil.miniprojet.agil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,10 +59,10 @@ public class AjoutClient extends AppCompatActivity  {
     ArrayList<String> listProd =new ArrayList<String>();
 
 
-    String showUrl="http://192.168.137.1/test/ajoutClient.php";
-    String recupProduitUrl="http://192.168.137.1/test/listeproduit.php";
-    String recupStationUrl="http://192.168.137.1/test/listestation.php";
-    String recupPromoUrl="http://192.168.137.1/test/listepromotion.php";
+    String showUrl="http://192.168.1.100:81/WebService1/ajoutClient.php";
+    String recupProduitUrl="http://192.168.1.100:81/WebService1/listeproduit.php";
+    String recupStationUrl="http://192.168.1.100:81/WebService1/listestation.php";
+    String recupPromoUrl="http://192.168.1.100:81/WebService1/listepromotion.php";
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> adapter2;
 
@@ -74,13 +75,11 @@ public class AjoutClient extends AppCompatActivity  {
         tel = (EditText) findViewById(R.id.editT);
         station = (Spinner) findViewById(R.id.stationList);
         produit = (Spinner) findViewById(R.id.prodList);
-
-
         qte = (EditText) findViewById(R.id.editQte);
         btnajouter = (Button) findViewById(R.id.btnAjout);
         btnajouter.setOnClickListener(new OnClickListener());
 
-        //Setting the ArrayAdapter data on the Spinner
+             //Setting the ArrayAdapter data on the Spinner
 
         requestQueue   = Volley.newRequestQueue(this);
         requestQueue2   = Volley.newRequestQueue(this);
@@ -93,9 +92,6 @@ public class AjoutClient extends AppCompatActivity  {
 
 
     }
-
-
-
 
 
 
@@ -128,6 +124,8 @@ public class AjoutClient extends AppCompatActivity  {
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(AjoutClient.this,"valide",Toast.LENGTH_SHORT).show();
+                    Intent i1= new Intent(getApplicationContext(),AfficherProduit.class);
+                    startActivity(i1);
 
                 }
             }, new Response.ErrorListener() {
@@ -348,7 +346,7 @@ public class AjoutClient extends AppCompatActivity  {
                     if(exist==false){
                         throw new JSONException("erreur de connection");
                     }
-                    Toast.makeText(AjoutClient.this,listProm.toString(), Toast.LENGTH_LONG).show();
+                   // Toast.makeText(AjoutClient.this,listProm.toString(), Toast.LENGTH_LONG).show();
                     listProd.clear();
                     recupProduit();
 

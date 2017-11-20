@@ -28,6 +28,7 @@ import android.widget.AdapterView;
 
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 public class AfficherProduit extends Activity {
-    String showUrl="http://192.168.1.5:81/WebService1/listepromoprod.php";
+    String showUrl="http://192.168.1.100:81/WebService1/listepromoprod.php";
     private ListView listView=null;
     private ArrayList<String> list = new ArrayList<String>();
     RequestQueue requestQueue;
@@ -58,6 +59,7 @@ public class AfficherProduit extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i1= new Intent(getApplicationContext(),AjoutClient.class);
                 startActivity(i1);
             }
@@ -87,10 +89,9 @@ public class AfficherProduit extends Activity {
                         String prix= produit.getString("prixfinal");
                         String dateD= produit.getString("datedebut");
                         String dateF= produit.getString("datefin");
-
                         // String marque = produit
-                        String ligne = "- Produit : "+nom+"\n Qantité : "+quantite+"  \n prix : "+prix
-                                +"\n Date Debut : "+dateD+" \n  Date Fin : "+dateF;
+                        String ligne = nom+"\n "+quantite+"  \n"+prix +"DT"
+                                +"\n "+dateD+" \n "+dateF;
                         list.add(ligne);
 
                     }
