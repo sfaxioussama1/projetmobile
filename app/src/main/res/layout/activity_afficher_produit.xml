@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tn.agil.miniprojet.agil.AfficherProduit"
-    android:background="#ffffff"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,17 +22,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:layout_marginLeft="250dp">
-        <ImageButton
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="300dp">
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            app:layout_anchor="@id/listView1"
-            android:background="@mipmap/plus"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            app:srcCompat="@android:drawable/ic_menu_add" />
+
     </LinearLayout>
 
 

@@ -17,19 +17,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,10 +49,17 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 public class AfficherProduit extends Activity {
-    String showUrl="http://192.168.1.100:81/WebService1/listepromoprod.php";
+    String showUrl="http://192.168.1.5:81/WebService1/listepromoprod.php";
+    String showUrlClient="http://192.168.1.5:81/WebService1/listeClients.php";
     private ListView listView=null;
     private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> listClient = new ArrayList<String>();
     RequestQueue requestQueue;
+    RequestQueue requestQueue2;
+    ProgressBar progressBar;
+    View dialogView;
+    EditText cin ;
+    boolean exist ;
 
 
     @Override
@@ -54,16 +68,74 @@ public class AfficherProduit extends Activity {
         setContentView(R.layout.activity_afficher_produit);
         listView = (ListView) findViewById(R.id.listView1);
         requestQueue = Volley.newRequestQueue(this);
+        requestQueue2 = Volley.newRequestQueue(this);
         recup();
-        ImageButton btn = (ImageButton) findViewById(R.id.fab);
+        FloatingActionButton btn = (FloatingActionButton) findViewById(R.id.fab);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i1= new Intent(getApplicationContext(),AjoutClient.class);
-                startActivity(i1);
+               /* Intent i1= new Intent(getApplicationContext(),AjoutClient.class);
+                startActivity(i1);*/
+                dialogView = getLayoutInflater().inflate(R.layout.dialog_cin,null);
+                cin=(EditText)dialogView.findViewById(R.id.cin);
+                progressBar=(ProgressBar)dialogView.findViewById(R.id.progressBar2);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(AfficherProduit.this);
+                builder.setTitle("Authentification");
+                builder.setPositiveButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.cancel();
+
+                    }
+                });
+                builder.setNegativeButton("Se connecter", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+
+                builder.setView(dialogView);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Boolean wantToCloseDialog = false;
+                        //Do stuff, possibly set wantToCloseDialog to true then...
+                        if(wantToCloseDialog)
+                            dialog.dismiss();
+                        //else dialog stays open. Make sure you have an obvious way to close the dialog especially if you set cancellable to false.
+                        String cinTest=cin.getText().toString();
+
+                        if (TextUtils.isEmpty(cinTest)||cinTest.length()!=8 || !verifText(cinTest)) {
+                            cin.setError("Non valide");
+                        }else{
+
+                          recupClient(cin);
+
+                        }
+                    }
+                });
             }
         });
+    }
+    public boolean verifText(String ch){
+        long num ;
+        try{
+
+            Long.parseLong(ch);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 
     public void recup(){
@@ -84,7 +156,7 @@ public class AfficherProduit extends Activity {
                         JSONObject produit = produits.getJSONObject(i);
                         //add list
 
-                        String nom = produit.getString("nomproduit");
+                        String nom = produit.getString("nom");
                         String quantite = produit.getString("quantite");
                         String prix= produit.getString("prixfinal");
                         String dateD= produit.getString("datedebut");
@@ -147,6 +219,77 @@ public class AfficherProduit extends Activity {
 
         };
         requestQueue.add(jsonObjectRequest);
+
+    }
+
+    public void recupClient(EditText cint){
+
+        final String test = cint.getText().toString();
+        progressBar.setVisibility(View.VISIBLE);
+        cin.setVisibility(View.GONE);
+        exist = false ;
+
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,showUrlClient,new Response.Listener<JSONObject>(){
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    JSONArray clients = response.getJSONArray("clients");
+
+                    for (int i = 0; i < clients.length(); i++) {
+                        JSONObject client = clients.getJSONObject(i);
+                        String cinb = client.getString("cin");
+                        listClient.add(cinb);
+                    }
+
+
+                        if(listClient.contains(test)) {
+
+                            throw new JSONException("erreur");
+
+                        }else{
+
+                            cin.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                            Intent myIntent= new Intent(AfficherProduit.this,AjoutClient.class);
+                            myIntent.putExtra("cin",cin.getText().toString());
+                            startActivity(myIntent);
+                        }
+
+                    //result.append("===\n");
+                } catch (JSONException e) {
+                    // result.setText("exception");
+                    cin.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(AfficherProduit.this, "Client existe ", Toast.LENGTH_LONG).show();
+                    Intent i1= new Intent(getApplicationContext(),AjoutVente.class);
+                    startActivity(i1);
+                }
+
+            }
+        },
+
+                new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //result.setText(ch);
+                        cin.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(AfficherProduit.this, "Une erreur technique est survenue.Veuillez réessayer plus tard.", Toast.LENGTH_LONG).show();
+
+                    }
+
+
+
+                }){
+
+
+        };
+        requestQueue2.add(jsonObjectRequest);
 
     }
 

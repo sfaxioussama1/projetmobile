@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tn.agil.miniprojet.agil.Authentification"
-    android:background="@mipmap/bgagil"
+
     >
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -48,7 +48,6 @@
                     android:ems="10"
                     android:hint="password"
                     android:inputType="textPassword"
-                    android:textColor="#E0E0E0"
                     android:padding="10dp"
                     />
                 <Button
